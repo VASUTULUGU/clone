@@ -1,0 +1,22 @@
+import mysql.connector
+
+# Connect to the database
+cnx = mysql.connector.connect(user='username', password='password', host='hostname', database='database_name')
+
+# Create a cursor to execute queries
+cursor = cnx.cursor()
+
+# Get the user's question and tags from the form
+question = request.form['question']
+tags = request.form['tags']
+
+# Insert the question and tags into the questions table
+query = "INSERT INTO questions (question, tags) VALUES (%s, %s)"
+cursor.execute(query, (question, tags))
+
+# Commit the changes to the database
+cnx.commit()
+
+# Close the cursor and connection
+cursor.close()
+cnx.close()
