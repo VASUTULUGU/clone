@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Results</title>
+</head>
+<body>
+  <h1>Search Results</h1>
+  {% for question in questions %}
+    <h2>{{ question.question }}</h2>
+    <p>Tags: {{ question.tags }}</p>
+    <a href="/questions/{{ question.id }}">View question</a>
+  {% endfor %}
+</body>
+</html>
