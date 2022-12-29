@@ -1,0 +1,22 @@
+import mysql.connector
+
+# Connect to the database
+cnx = mysql.connector.connect(user='username', password='password', host='hostname', database='database_name')
+
+# Create a cursor to execute queries
+cursor = cnx.cursor()
+
+# Get the search term from the form
+search_term = request.form['search']
+
+# Retrieve the questions that match the search term
+query = "SELECT * FROM questions WHERE tags LIKE %s"
+cursor.execute(query, (f"%{search_term}%",))
+questions = cursor.fetchall()
+
+# Close the cursor and connection
+cursor.close()
+cnx.close()
+
+# Render the search results page with the matching questions
+return render_template("search_results.html", questions=questions)
